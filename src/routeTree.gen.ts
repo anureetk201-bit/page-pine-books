@@ -10,33 +10,219 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AccountRouteImport } from './routes/account'
+import { Route as BestsellersRouteImport } from './routes/bestsellers'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as NewArrivalsRouteImport } from './routes/new-arrivals'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as WishlistRouteImport } from './routes/wishlist'
+import { Route as AuthorsIndexRouteImport } from './routes/authors.index'
+import { Route as AuthorsIdRouteImport } from './routes/authors.$id'
+import { Route as BooksIndexRouteImport } from './routes/books.index'
+import { Route as BooksIdRouteImport } from './routes/books.$id'
+import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
+import { Route as CategoriesSlugRouteImport } from './routes/categories.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BestsellersRoute = BestsellersRouteImport.update({
+  id: '/bestsellers',
+  path: '/bestsellers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewArrivalsRoute = NewArrivalsRouteImport.update({
+  id: '/new-arrivals',
+  path: '/new-arrivals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WishlistRoute = WishlistRouteImport.update({
+  id: '/wishlist',
+  path: '/wishlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthorsIndexRoute = AuthorsIndexRouteImport.update({
+  id: '/authors/',
+  path: '/authors/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthorsIdRoute = AuthorsIdRouteImport.update({
+  id: '/authors/$id',
+  path: '/authors/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BooksIndexRoute = BooksIndexRouteImport.update({
+  id: '/books/',
+  path: '/books/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BooksIdRoute = BooksIdRouteImport.update({
+  id: '/books/$id',
+  path: '/books/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesSlugRoute = CategoriesSlugRouteImport.update({
+  id: '/categories/$slug',
+  path: '/categories/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/bestsellers': typeof BestsellersRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/new-arrivals': typeof NewArrivalsRoute
+  '/search': typeof SearchRoute
+  '/wishlist': typeof WishlistRoute
+  '/authors/$id': typeof AuthorsIdRoute
+  '/books/$id': typeof BooksIdRoute
+  '/categories/$slug': typeof CategoriesSlugRoute
+  '/authors/': typeof AuthorsIndexRoute
+  '/books/': typeof BooksIndexRoute
+  '/categories/': typeof CategoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/bestsellers': typeof BestsellersRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/new-arrivals': typeof NewArrivalsRoute
+  '/search': typeof SearchRoute
+  '/wishlist': typeof WishlistRoute
+  '/authors/$id': typeof AuthorsIdRoute
+  '/books/$id': typeof BooksIdRoute
+  '/categories/$slug': typeof CategoriesSlugRoute
+  '/authors': typeof AuthorsIndexRoute
+  '/books': typeof BooksIndexRoute
+  '/categories': typeof CategoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/bestsellers': typeof BestsellersRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/new-arrivals': typeof NewArrivalsRoute
+  '/search': typeof SearchRoute
+  '/wishlist': typeof WishlistRoute
+  '/authors/$id': typeof AuthorsIdRoute
+  '/books/$id': typeof BooksIdRoute
+  '/categories/$slug': typeof CategoriesSlugRoute
+  '/authors/': typeof AuthorsIndexRoute
+  '/books/': typeof BooksIndexRoute
+  '/categories/': typeof CategoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/account'
+    | '/bestsellers'
+    | '/cart'
+    | '/checkout'
+    | '/new-arrivals'
+    | '/search'
+    | '/wishlist'
+    | '/authors/$id'
+    | '/books/$id'
+    | '/categories/$slug'
+    | '/authors/'
+    | '/books/'
+    | '/categories/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/account'
+    | '/bestsellers'
+    | '/cart'
+    | '/checkout'
+    | '/new-arrivals'
+    | '/search'
+    | '/wishlist'
+    | '/authors/$id'
+    | '/books/$id'
+    | '/categories/$slug'
+    | '/authors'
+    | '/books'
+    | '/categories'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/account'
+    | '/bestsellers'
+    | '/cart'
+    | '/checkout'
+    | '/new-arrivals'
+    | '/search'
+    | '/wishlist'
+    | '/authors/$id'
+    | '/books/$id'
+    | '/categories/$slug'
+    | '/authors/'
+    | '/books/'
+    | '/categories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AccountRoute: typeof AccountRoute
+  BestsellersRoute: typeof BestsellersRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
+  NewArrivalsRoute: typeof NewArrivalsRoute
+  SearchRoute: typeof SearchRoute
+  WishlistRoute: typeof WishlistRoute
+  AuthorsIdRoute: typeof AuthorsIdRoute
+  BooksIdRoute: typeof BooksIdRoute
+  CategoriesSlugRoute: typeof CategoriesSlugRoute
+  AuthorsIndexRoute: typeof AuthorsIndexRoute
+  BooksIndexRoute: typeof BooksIndexRoute
+  CategoriesIndexRoute: typeof CategoriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +234,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bestsellers': {
+      id: '/bestsellers'
+      path: '/bestsellers'
+      fullPath: '/bestsellers'
+      preLoaderRoute: typeof BestsellersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/new-arrivals': {
+      id: '/new-arrivals'
+      path: '/new-arrivals'
+      fullPath: '/new-arrivals'
+      preLoaderRoute: typeof NewArrivalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/authors/': {
+      id: '/authors/'
+      path: '/authors'
+      fullPath: '/authors/'
+      preLoaderRoute: typeof AuthorsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/authors/$id': {
+      id: '/authors/$id'
+      path: '/authors/$id'
+      fullPath: '/authors/$id'
+      preLoaderRoute: typeof AuthorsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/books/': {
+      id: '/books/'
+      path: '/books'
+      fullPath: '/books/'
+      preLoaderRoute: typeof BooksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/books/$id': {
+      id: '/books/$id'
+      path: '/books/$id'
+      fullPath: '/books/$id'
+      preLoaderRoute: typeof BooksIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/': {
+      id: '/categories/'
+      path: '/categories'
+      fullPath: '/categories/'
+      preLoaderRoute: typeof CategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/$slug': {
+      id: '/categories/$slug'
+      path: '/categories/$slug'
+      fullPath: '/categories/$slug'
+      preLoaderRoute: typeof CategoriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AccountRoute: AccountRoute,
+  BestsellersRoute: BestsellersRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
+  NewArrivalsRoute: NewArrivalsRoute,
+  SearchRoute: SearchRoute,
+  WishlistRoute: WishlistRoute,
+  AuthorsIdRoute: AuthorsIdRoute,
+  BooksIdRoute: BooksIdRoute,
+  CategoriesSlugRoute: CategoriesSlugRoute,
+  AuthorsIndexRoute: AuthorsIndexRoute,
+  BooksIndexRoute: BooksIndexRoute,
+  CategoriesIndexRoute: CategoriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
