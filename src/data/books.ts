@@ -1,4 +1,10 @@
 import type { Book, Category } from "@/types/book";
+import fictionImage from "@/assets/cat-fiction.jpg";
+import nonfictionImage from "@/assets/cat-nonfiction.jpg";
+import selfhelpImage from "@/assets/cat-selfhelp.jpg";
+import romanceImage from "@/assets/cat-romance.jpg";
+import childrenImage from "@/assets/cat-children.jpg";
+import classicsImage from "@/assets/cat-classics.jpg";
 
 const cover = (isbn: string) => `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
 const common = {
@@ -43,12 +49,12 @@ export const books: Book[] = [
 ];
 
 export const categoryImages: Record<Category, string> = {
-  Fiction: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=800&q=85",
-  "Non-Fiction": "https://images.unsplash.com/photo-1455885666463-6e7c51d5654e?auto=format&fit=crop&w=800&q=85",
-  "Self-Help": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=85",
-  Romance: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?auto=format&fit=crop&w=800&q=85",
-  Children: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=85",
-  Classics: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=800&q=85",
+  Fiction: fictionImage,
+  "Non-Fiction": nonfictionImage,
+  "Self-Help": selfhelpImage,
+  Romance: romanceImage,
+  Children: childrenImage,
+  Classics: classicsImage,
 };
 
 export const categoryCopy: Record<Category, string> = {
