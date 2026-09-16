@@ -6,7 +6,7 @@ import { BookGrid } from "./BookCard";
 import { PageIntro } from "./PageIntro";
 import { Button } from "@/components/ui/button";
 
-export function CollectionPage({ title, eyebrow, source, copy, showFilters = true }: { title: string; eyebrow: string; source: Book[]; copy?: string; showFilters?: boolean }) {
+export function CollectionPage({ title, eyebrow, source, copy, showFilters = true }: { title: string; eyebrow: string; source: Book[]; copy?: string | undefined; showFilters?: boolean }) {
  const [query,setQuery]=useState(""); const [category,setCategory]=useState("All"); const [sort,setSort]=useState("featured"); const [limit,setLimit]=useState(12);
  const result=useMemo(()=>{ let list=source.filter((b)=>(category==="All"||b.category===category)&&`${b.title} ${b.author}`.toLowerCase().includes(query.toLowerCase())); return [...list].sort((a,b)=>sort==="low"?a.price-b.price:sort==="high"?b.price-a.price:sort==="rating"?b.rating-a.rating:sort==="new"?Date.parse(b.publicationDate)-Date.parse(a.publicationDate):Number(b.bestseller)-Number(a.bestseller)); },[source,query,category,sort]);
  return <><PageIntro eyebrow={eyebrow} title={title} copy={copy}/><main className="page-container py-10">{showFilters&&<div className="mb-8 grid gap-3 border border-border bg-card p-4 md:grid-cols-[1fr_auto_auto]">
