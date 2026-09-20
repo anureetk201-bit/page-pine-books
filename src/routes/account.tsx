@@ -20,7 +20,7 @@ function AccountPage() {
 
   useEffect(() => {
     if (!user) return;
-    void supabase.from("profiles").select("full_name").eq("id", user.id).maybeSingle().then(({ data }) => setName(data?.full_name ?? String(user.user_metadata.full_name ?? "")));
+    void supabase.from("profiles").select("full_name").eq("id", user.id).maybeSingle().then(({ data }) => setName(data?.full_name ?? String(user.user_metadata["full_name"] ?? "")));
   }, [user]);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
