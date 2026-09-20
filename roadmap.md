@@ -10,8 +10,8 @@
 - [x] Verified interactions, layouts, and diagnostics
 
 ## Real storefront upgrade
-- [ ] Add real customer accounts and profiles
-- [ ] Persist carts, wishlists, orders, and book catalog in Lovable Cloud
-- [ ] Use reliable real book-cover assets
-- [ ] Match the reference header and lift the main image upward
+- [x] Add real customer accounts and profiles
+- [x] Persist carts, wishlists, orders, and book catalog in Lovable Cloud
+- [x] Use reliable real book-cover assets
+- [x] Match the reference header and lift the main image upward
 - [ ] Expand the About page and verify all flows
