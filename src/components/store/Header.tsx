@@ -25,10 +25,10 @@ export function Header() {
         <span className="hidden items-center justify-end gap-4 sm:flex"><span className="flex items-center gap-1.5"><Headphones className="size-3.5" /> Customer Support</span><span>EN⌄</span></span>
       </div>
     </div>
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/95 backdrop-blur">
-      <div className="page-container grid h-20 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 lg:grid-cols-[auto_1fr_auto]">
+    <header className="relative z-50 border-b border-border bg-background">
+      <div className="page-container grid h-[72px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 lg:grid-cols-[auto_1fr_auto]">
         <Brand />
-        <nav className="hidden items-center justify-center gap-6 lg:flex" aria-label="Main navigation">
+        <nav className="hidden items-center justify-center gap-7 lg:flex" aria-label="Main navigation">
           {links.map(([label, to]) => <Link key={to} to={to} activeOptions={{ exact: to === "/" }} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }}>{label}</Link>)}
         </nav>
         <div className="flex shrink-0 items-center gap-0.5">
