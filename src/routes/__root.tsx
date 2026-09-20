@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { StoreProvider } from "../context/StoreContext";
 import { Header } from "../components/store/Header";
 import { Footer } from "../components/store/Footer";
+import { AuthProvider } from "../context/AuthContext";
 
 function NotFoundComponent() {
   return (
@@ -124,13 +125,15 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StoreProvider>
-        <div className="min-h-screen bg-background">
-          <Header />
-          <Outlet />
-          <Footer />
-        </div>
-      </StoreProvider>
+      <AuthProvider>
+        <StoreProvider>
+          <div className="min-h-screen bg-background">
+            <Header />
+            <Outlet />
+            <Footer />
+          </div>
+        </StoreProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
