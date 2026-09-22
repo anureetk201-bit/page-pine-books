@@ -15,6 +15,13 @@
       "when": 1790066766817,
       "tag": "0001_extend_reader_profiles",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790067209427,
+      "tag": "0002_admin_access_and_claim",
+      "breakpoints": true
     }
   ]
 }
