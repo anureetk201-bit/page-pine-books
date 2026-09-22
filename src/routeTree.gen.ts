@@ -12,10 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AccountRouteImport } from './routes/account'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as BestsellersRouteImport } from './routes/bestsellers'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as NewArrivalsRouteImport } from './routes/new-arrivals'
+import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as AuthorsIndexRouteImport } from './routes/authors.index'
@@ -40,6 +42,11 @@ const AccountRoute = AccountRouteImport.update({
   path: '/account',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BestsellersRoute = BestsellersRouteImport.update({
   id: '/bestsellers',
   path: '/bestsellers',
@@ -58,6 +65,11 @@ const CheckoutRoute = CheckoutRouteImport.update({
 const NewArrivalsRoute = NewArrivalsRouteImport.update({
   id: '/new-arrivals',
   path: '/new-arrivals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -105,10 +117,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
   '/bestsellers': typeof BestsellersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/new-arrivals': typeof NewArrivalsRoute
+  '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
@@ -122,10 +136,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
   '/bestsellers': typeof BestsellersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/new-arrivals': typeof NewArrivalsRoute
+  '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
@@ -140,10 +156,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
   '/bestsellers': typeof BestsellersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/new-arrivals': typeof NewArrivalsRoute
+  '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
@@ -159,10 +177,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/account'
+    | '/admin'
     | '/bestsellers'
     | '/cart'
     | '/checkout'
     | '/new-arrivals'
+    | '/orders'
     | '/search'
     | '/wishlist'
     | '/authors/$id'
@@ -176,10 +196,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/account'
+    | '/admin'
     | '/bestsellers'
     | '/cart'
     | '/checkout'
     | '/new-arrivals'
+    | '/orders'
     | '/search'
     | '/wishlist'
     | '/authors/$id'
@@ -193,10 +215,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/account'
+    | '/admin'
     | '/bestsellers'
     | '/cart'
     | '/checkout'
     | '/new-arrivals'
+    | '/orders'
     | '/search'
     | '/wishlist'
     | '/authors/$id'
@@ -211,10 +235,12 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AccountRoute: typeof AccountRoute
+  AdminRoute: typeof AdminRoute
   BestsellersRoute: typeof BestsellersRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   NewArrivalsRoute: typeof NewArrivalsRoute
+  OrdersRoute: typeof OrdersRoute
   SearchRoute: typeof SearchRoute
   WishlistRoute: typeof WishlistRoute
   AuthorsIdRoute: typeof AuthorsIdRoute
@@ -248,6 +274,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccountRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bestsellers': {
       id: '/bestsellers'
       path: '/bestsellers'
@@ -274,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/new-arrivals'
       fullPath: '/new-arrivals'
       preLoaderRoute: typeof NewArrivalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -339,10 +379,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AccountRoute: AccountRoute,
+  AdminRoute: AdminRoute,
   BestsellersRoute: BestsellersRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   NewArrivalsRoute: NewArrivalsRoute,
+  OrdersRoute: OrdersRoute,
   SearchRoute: SearchRoute,
   WishlistRoute: WishlistRoute,
   AuthorsIdRoute: AuthorsIdRoute,
