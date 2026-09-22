@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Brand } from "./Brand";
 import { useStore } from "@/context/StoreContext";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
 
 const links = [
   ["HOME", "/"], ["BOOKS", "/books"], ["CATEGORIES", "/categories"], ["BESTSELLERS", "/bestsellers"],
@@ -12,6 +13,7 @@ const links = [
 
 export function Header() {
   const { cartCount } = useStore();
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -33,7 +35,7 @@ export function Header() {
         </nav>
         <div className="flex shrink-0 items-center gap-0.5">
           <Button variant="ghost" size="icon" aria-label="Search" onClick={() => setSearchOpen(true)}><Search /></Button>
-          <Button asChild variant="ghost" size="icon"><Link to="/account" aria-label="Account"><UserRound /></Link></Button>
+          <Button asChild variant="ghost" size="icon"><Link to="/account" aria-label={user ? `Account for ${user.email ?? "reader"}` : "Sign in"}><UserRound className={user ? "fill-primary/15" : undefined} /></Link></Button>
           <Button asChild variant="ghost" size="icon"><Link to="/wishlist" aria-label="Wishlist"><span className="text-base">♡</span></Link></Button>
           <Button asChild variant="ghost" size="icon" className="relative"><Link to="/cart" aria-label={`Cart with ${cartCount} items`}><ShoppingBag />{cartCount > 0 && <span className="absolute right-0 top-0 grid size-4 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">{cartCount}</span>}</Link></Button>
           <Button variant="ghost" size="icon" className="lg:hidden" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
