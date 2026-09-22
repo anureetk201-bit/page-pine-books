@@ -7,6 +7,7 @@ import { books, categories, categoryCopy, categoryImages } from "@/data/books";
 import { BookCard } from "@/components/store/BookCard";
 import { Button } from "@/components/ui/button";
 import { NewsletterForm } from "@/components/store/Footer";
+import { RecommendedForYou } from "@/components/store/RecommendedForYou";
 
 export const Route = createFileRoute("/")({
  head:()=>({meta:[{title:"Page & Pine — Books for Every Mind & Moment"},{name:"description",content:"Discover bestselling fiction, timeless classics, thoughtful non-fiction, and new arrivals at Page & Pine Bookshop."},{property:"og:title",content:"Page & Pine — Books for Every Mind & Moment"},{property:"og:description",content:"A warmly curated independent bookshop for stories that stay."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component: Home,
