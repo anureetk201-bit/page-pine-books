@@ -16,6 +16,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as BestsellersRouteImport } from './routes/bestsellers'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as NewArrivalsRouteImport } from './routes/new-arrivals'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as SearchRouteImport } from './routes/search'
@@ -60,6 +61,11 @@ const CartRoute = CartRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiscoverRoute = DiscoverRouteImport.update({
+  id: '/discover',
+  path: '/discover',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewArrivalsRoute = NewArrivalsRouteImport.update({
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/bestsellers': typeof BestsellersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/discover': typeof DiscoverRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/bestsellers': typeof BestsellersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/discover': typeof DiscoverRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/bestsellers': typeof BestsellersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/discover': typeof DiscoverRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/bestsellers'
     | '/cart'
     | '/checkout'
+    | '/discover'
     | '/new-arrivals'
     | '/orders'
     | '/search'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/bestsellers'
     | '/cart'
     | '/checkout'
+    | '/discover'
     | '/new-arrivals'
     | '/orders'
     | '/search'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/bestsellers'
     | '/cart'
     | '/checkout'
+    | '/discover'
     | '/new-arrivals'
     | '/orders'
     | '/search'
@@ -239,6 +251,7 @@ export interface RootRouteChildren {
   BestsellersRoute: typeof BestsellersRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  DiscoverRoute: typeof DiscoverRoute
   NewArrivalsRoute: typeof NewArrivalsRoute
   OrdersRoute: typeof OrdersRoute
   SearchRoute: typeof SearchRoute
@@ -300,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/discover': {
+      id: '/discover'
+      path: '/discover'
+      fullPath: '/discover'
+      preLoaderRoute: typeof DiscoverRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/new-arrivals': {
@@ -383,6 +403,7 @@ const rootRouteChildren: RootRouteChildren = {
   BestsellersRoute: BestsellersRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  DiscoverRoute: DiscoverRoute,
   NewArrivalsRoute: NewArrivalsRoute,
   OrdersRoute: OrdersRoute,
   SearchRoute: SearchRoute,
