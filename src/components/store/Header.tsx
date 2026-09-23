@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 
 const links = [
-  ["HOME", "/"], ["BOOKS", "/books"], ["CATEGORIES", "/categories"], ["BESTSELLERS", "/bestsellers"],
+  ["HOME", "/"], ["BOOKS", "/books"], ["DISCOVER", "/discover"], ["CATEGORIES", "/categories"], ["BESTSELLERS", "/bestsellers"],
   ["NEW ARRIVALS", "/new-arrivals"], ["AUTHORS", "/authors"], ["ABOUT US", "/about"],
 ] as const;
 

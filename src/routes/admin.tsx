@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { InventoryManager } from "@/components/store/InventoryManager";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [
@@ -140,6 +141,8 @@ function AdminPage() {
           </ul>
         </section>
       </div>
+
+      <InventoryManager />
     </main>
   );
 }

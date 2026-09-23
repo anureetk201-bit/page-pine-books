@@ -27,6 +27,7 @@ export type Database = {
           format: string
           id: string
           isbn: string
+          low_stock_threshold: number
           new_arrival: boolean
           original_price: number | null
           pages: number
@@ -35,6 +36,7 @@ export type Database = {
           publisher: string
           rating: number
           review_count: number
+          stock_quantity: number
           title: string
         }
         Insert: {
@@ -49,6 +51,7 @@ export type Database = {
           format: string
           id: string
           isbn: string
+          low_stock_threshold?: number
           new_arrival?: boolean
           original_price?: number | null
           pages: number
@@ -57,6 +60,7 @@ export type Database = {
           publisher: string
           rating?: number
           review_count?: number
+          stock_quantity?: number
           title: string
         }
         Update: {
@@ -71,6 +75,7 @@ export type Database = {
           format?: string
           id?: string
           isbn?: string
+          low_stock_threshold?: number
           new_arrival?: boolean
           original_price?: number | null
           pages?: number
@@ -79,6 +84,7 @@ export type Database = {
           publisher?: string
           rating?: number
           review_count?: number
+          stock_quantity?: number
           title?: string
         }
         Relationships: []
@@ -213,6 +219,47 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      reviews: {
+        Row: {
+          body: string
+          book_id: string
+          created_at: string
+          id: string
+          rating: number
+          reviewer_name: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string
+          book_id: string
+          created_at?: string
+          id?: string
+          rating: number
+          reviewer_name?: string
+          title?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          book_id?: string
+          created_at?: string
+          id?: string
+          rating?: number
+          reviewer_name?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_book_id_fkey"
+            columns: ["book_id"]
+            isOneToOne: false
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
