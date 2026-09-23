@@ -15,3 +15,8 @@
 - [x] Use reliable real book-cover assets
 - [x] Match the reference header and lift the main image upward
 - [x] Expand the About page and verify all flows
+
+## Personalisation and operations
+- [x] Personalized recommendations from orders, wishlist, and bag
+- [x] Order history page for signed-in readers
+- [x] Admin store dashboard with revenue, orders, and top titles
