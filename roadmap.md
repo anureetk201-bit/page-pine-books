@@ -20,3 +20,8 @@
 - [x] Personalized recommendations from orders, wishlist, and bag
 - [x] Order history page for signed-in readers
 - [x] Admin store dashboard with revenue, orders, and top titles
+
+## Discovery, reviews, inventory
+- [x] Smart AI-assisted book discovery page
+- [x] Customer reviews on book detail pages
+- [x] Inventory management in the store dashboard
