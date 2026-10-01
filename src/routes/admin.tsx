@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { InventoryManager } from "@/components/store/InventoryManager";
+import { AddBookForm } from "@/components/store/AddBookForm";
+import { AdminLogin } from "@/components/store/AdminLogin";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [
@@ -63,15 +65,7 @@ function AdminPage() {
 
   if (loading) return <main className="grid min-h-[520px] place-items-center bg-secondary"><p className="eyebrow">Checking access…</p></main>;
 
-  if (!user) return (
-    <main className="grid min-h-[520px] place-items-center bg-secondary px-4 text-center">
-      <div>
-        <p className="eyebrow">Store dashboard</p>
-        <h1 className="mt-2 font-display text-4xl">Sign in to continue</h1>
-        <Button asChild className="mt-6"><Link to="/account">Go to account</Link></Button>
-      </div>
-    </main>
-  );
+  if (!user) return <AdminLogin />;
 
   if (isAdmin === false) return (
     <main className="grid min-h-[520px] place-items-center bg-secondary px-4 text-center">
@@ -142,6 +136,7 @@ function AdminPage() {
         </section>
       </div>
 
+      <AddBookForm />
       <InventoryManager />
     </main>
   );
