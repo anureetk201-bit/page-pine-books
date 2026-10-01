@@ -25,3 +25,10 @@
 - [x] Smart AI-assisted book discovery page
 - [x] Customer reviews on book detail pages
 - [x] Inventory management in the store dashboard
+
+## Payments and admin
+- [ ] Real card payments — blocked: needs paid plan upgrade or the owner's own Stripe key
+- [x] Real book covers (verified all load from Open Library)
+- [x] Add-book form in dashboard (covers by ISBN)
+- [x] Stock drops automatically when orders are placed (tested)
+- [x] Admin sign-in screen on the dashboard
