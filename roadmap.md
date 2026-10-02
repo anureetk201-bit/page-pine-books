@@ -32,3 +32,7 @@
 - [x] Add-book form in dashboard (covers by ISBN)
 - [x] Stock drops automatically when orders are placed (tested)
 - [x] Admin sign-in screen on the dashboard
+
+## Customer care
+- [x] Customer support menu and help center
+- [x] Persistent language selector in the announcement bar
