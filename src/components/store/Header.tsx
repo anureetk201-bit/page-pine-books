@@ -5,12 +5,13 @@ import { Brand } from "./Brand";
 import { useStore } from "@/context/StoreContext";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
+import { languages } from "@/data/languages";
+import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -26,6 +27,7 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [language, setLanguage] = useState("en");
+  const [languageOpen, setLanguageOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem("page-pine-language") ?? "en";
@@ -36,6 +38,7 @@ export function Header() {
     setLanguage(value);
     window.localStorage.setItem("page-pine-language", value);
     document.documentElement.lang = value;
+    setLanguageOpen(false);
   }
   function submitSearch(event: React.FormEvent) { event.preventDefault(); if (query.trim()) { navigate({ to: "/search", search: { q: query.trim() } }); setSearchOpen(false); } }
   return <>
@@ -52,16 +55,23 @@ export function Header() {
               <DropdownMenuItem asChild><Link to="/account">Account help</Link></DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild><Button variant="ghost" className="h-7 gap-1 px-2 text-[10px] uppercase text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" aria-label="Select language">{language}<ChevronDown className="size-3" /></Button></DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="min-w-40">
-              <DropdownMenuRadioGroup value={language} onValueChange={changeLanguage}>
-                <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="hi">हिन्दी</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="pa">ਪੰਜਾਬੀ</DropdownMenuRadioItem>
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Popover open={languageOpen} onOpenChange={setLanguageOpen}>
+            <PopoverTrigger asChild><Button variant="ghost" className="h-7 gap-1 px-2 text-[10px] uppercase text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" aria-label="Select language">{language}<ChevronDown className="size-3" /></Button></PopoverTrigger>
+            <PopoverContent align="end" className="w-64 p-0">
+              <Command>
+                <CommandInput placeholder="Search languages…" aria-label="Search languages" />
+                <CommandList className="max-h-72">
+                  <CommandEmpty>No language found.</CommandEmpty>
+                  {languages.map(({ code, name }) => (
+                    <CommandItem key={code} value={`${name} ${code}`} onSelect={() => changeLanguage(code)}>
+                      <Check className={language === code ? "opacity-100" : "opacity-0"} />
+                      <span className="flex-1">{name}</span><span className="text-xs uppercase text-muted-foreground">{code}</span>
+                    </CommandItem>
+                  ))}
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
         </span>
       </div>
     </div>

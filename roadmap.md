@@ -35,4 +35,4 @@
 
 ## Customer care
 - [x] Customer support menu and help center
-- [x] Persistent language selector in the announcement bar
+- [x] Searchable all-language selector with persistent choice in the announcement bar
