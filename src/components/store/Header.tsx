@@ -1,10 +1,18 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Headphones, Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
-import { useState } from "react";
+import { Check, ChevronDown, Headphones, Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Brand } from "./Brand";
 import { useStore } from "@/context/StoreContext";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const links = [
   ["HOME", "/"], ["BOOKS", "/books"], ["DISCOVER", "/discover"], ["CATEGORIES", "/categories"], ["BESTSELLERS", "/bestsellers"],
@@ -17,14 +25,44 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [language, setLanguage] = useState("en");
   const navigate = useNavigate();
+  useEffect(() => {
+    const savedLanguage = window.localStorage.getItem("page-pine-language") ?? "en";
+    setLanguage(savedLanguage);
+    document.documentElement.lang = savedLanguage;
+  }, []);
+  function changeLanguage(value: string) {
+    setLanguage(value);
+    window.localStorage.setItem("page-pine-language", value);
+    document.documentElement.lang = value;
+  }
   function submitSearch(event: React.FormEvent) { event.preventDefault(); if (query.trim()) { navigate({ to: "/search", search: { q: query.trim() } }); setSearchOpen(false); } }
   return <>
     <div className="bg-primary text-primary-foreground">
       <div className="page-container grid h-8 grid-cols-[1fr_auto] items-center text-[10px] sm:grid-cols-3">
         <span className="flex items-center gap-2"><ShoppingBag className="size-3.5" /> Free shipping on orders over $50</span>
         <span className="hidden text-center sm:block">✦ &nbsp; Books that inspire, stories that stay.</span>
-        <span className="hidden items-center justify-end gap-4 sm:flex"><span className="flex items-center gap-1.5"><Headphones className="size-3.5" /> Customer Support</span><span>EN⌄</span></span>
+        <span className="hidden items-center justify-end gap-1 sm:flex">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild><Button variant="ghost" className="h-7 gap-1.5 px-2 text-[10px] text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Headphones className="size-3.5" /> Customer Support <ChevronDown className="size-3" /></Button></DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-48">
+              <DropdownMenuItem asChild><Link to="/support">Help center</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/orders">Track an order</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/account">Account help</Link></DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild><Button variant="ghost" className="h-7 gap-1 px-2 text-[10px] uppercase text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" aria-label="Select language">{language}<ChevronDown className="size-3" /></Button></DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-40">
+              <DropdownMenuRadioGroup value={language} onValueChange={changeLanguage}>
+                <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="hi">हिन्दी</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="pa">ਪੰਜਾਬੀ</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </span>
       </div>
     </div>
     <header className="relative z-50 border-b border-border bg-background">

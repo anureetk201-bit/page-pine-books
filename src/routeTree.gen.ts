@@ -20,6 +20,7 @@ import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as NewArrivalsRouteImport } from './routes/new-arrivals'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as SupportRouteImport } from './routes/support'
 import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as AuthorsIndexRouteImport } from './routes/authors.index'
 import { Route as AuthorsIdRouteImport } from './routes/authors.$id'
@@ -83,6 +84,11 @@ const SearchRoute = SearchRouteImport.update({
   path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
   path: '/wishlist',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
+  '/support': typeof SupportRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
   '/books/$id': typeof BooksIdRoute
@@ -151,6 +158,7 @@ export interface FileRoutesByTo {
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
+  '/support': typeof SupportRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
   '/books/$id': typeof BooksIdRoute
@@ -172,6 +180,7 @@ export interface FileRoutesById {
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
   '/search': typeof SearchRoute
+  '/support': typeof SupportRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
   '/books/$id': typeof BooksIdRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
     | '/new-arrivals'
     | '/orders'
     | '/search'
+    | '/support'
     | '/wishlist'
     | '/authors/$id'
     | '/books/$id'
@@ -214,6 +224,7 @@ export interface FileRouteTypes {
     | '/new-arrivals'
     | '/orders'
     | '/search'
+    | '/support'
     | '/wishlist'
     | '/authors/$id'
     | '/books/$id'
@@ -234,6 +245,7 @@ export interface FileRouteTypes {
     | '/new-arrivals'
     | '/orders'
     | '/search'
+    | '/support'
     | '/wishlist'
     | '/authors/$id'
     | '/books/$id'
@@ -255,6 +267,7 @@ export interface RootRouteChildren {
   NewArrivalsRoute: typeof NewArrivalsRoute
   OrdersRoute: typeof OrdersRoute
   SearchRoute: typeof SearchRoute
+  SupportRoute: typeof SupportRoute
   WishlistRoute: typeof WishlistRoute
   AuthorsIdRoute: typeof AuthorsIdRoute
   BooksIdRoute: typeof BooksIdRoute
@@ -343,6 +356,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wishlist': {
       id: '/wishlist'
       path: '/wishlist'
@@ -407,6 +427,7 @@ const rootRouteChildren: RootRouteChildren = {
   NewArrivalsRoute: NewArrivalsRoute,
   OrdersRoute: OrdersRoute,
   SearchRoute: SearchRoute,
+  SupportRoute: SupportRoute,
   WishlistRoute: WishlistRoute,
   AuthorsIdRoute: AuthorsIdRoute,
   BooksIdRoute: BooksIdRoute,
