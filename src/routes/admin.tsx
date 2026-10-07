@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { InventoryManager } from "@/components/store/InventoryManager";
 import { AddBookForm } from "@/components/store/AddBookForm";
 import { AdminLogin } from "@/components/store/AdminLogin";
+import { formatPrice } from "@/lib/currency";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [
@@ -112,7 +113,7 @@ function AdminPage() {
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase text-primary">{order.status}</span>
-                  <strong className="font-display text-xl">${Number(order.total).toFixed(2)}</strong>
+                  <strong className="font-display text-xl">{formatPrice(Number(order.total))}</strong>
                   {order.status !== "delivered" && (
                     <Button size="sm" variant="outline" onClick={() => void markDelivered(order.id)}>Mark delivered</Button>
                   )}
