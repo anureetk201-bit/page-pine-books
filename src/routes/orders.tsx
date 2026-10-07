@@ -79,7 +79,7 @@ function OrdersPage() {
               </div>
               <div className="flex items-center gap-4">
                 <span className="border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase text-primary">{order.status}</span>
-                <strong className="font-display text-2xl">${Number(order.total).toFixed(2)}</strong>
+                <strong className="font-display text-2xl">{formatPrice(Number(order.total))}</strong>
               </div>
             </header>
             <ul className="divide-y divide-border">

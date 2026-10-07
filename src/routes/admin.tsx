@@ -91,7 +91,7 @@ function AdminPage() {
       <h1 className="mt-2 font-display text-5xl">Store dashboard</h1>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Metric label="Revenue" value={`$${revenue.toFixed(2)}`} />
+        <Metric label="Revenue" value={formatPrice(revenue)} />
         <Metric label="Orders" value={String(orders.length)} />
         <Metric label="Books sold" value={String(unitsSold)} />
         <Metric label="Readers" value={String(customers)} />

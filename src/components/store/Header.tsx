@@ -44,7 +44,7 @@ export function Header() {
   return <>
     <div className="bg-primary text-primary-foreground">
       <div className="page-container grid h-8 grid-cols-[1fr_auto] items-center text-[10px] sm:grid-cols-3">
-        <span className="flex items-center gap-2"><ShoppingBag className="size-3.5" /> Free shipping on orders over $50</span>
+        <span className="flex items-center gap-2"><ShoppingBag className="size-3.5" /> {`Free shipping on orders over ${formatPrice(FREE_SHIPPING_THRESHOLD)}`}</span>
         <span className="hidden text-center sm:block">✦ &nbsp; Books that inspire, stories that stay.</span>
         <span className="hidden items-center justify-end gap-1 sm:flex">
           <DropdownMenu>
