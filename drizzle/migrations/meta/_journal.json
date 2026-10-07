@@ -36,6 +36,13 @@
       "when": 1790848906329,
       "tag": "0004_decrement_stock_on_order",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791366252307,
+      "tag": "0005_prices_to_rupees",
+      "breakpoints": true
     }
   ]
 }
