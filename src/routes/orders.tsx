@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { RecommendedForYou } from "@/components/store/RecommendedForYou";
+import { formatPrice } from "@/lib/currency";
 
 export const Route = createFileRoute("/orders")({
   head: () => ({ meta: [
@@ -79,14 +80,14 @@ function OrdersPage() {
               </div>
               <div className="flex items-center gap-4">
                 <span className="border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase text-primary">{order.status}</span>
-                <strong className="font-display text-2xl">${Number(order.total).toFixed(2)}</strong>
+                <strong className="font-display text-2xl">{formatPrice(Number(order.total))}</strong>
               </div>
             </header>
             <ul className="divide-y divide-border">
               {order.order_items.map((item) => (
                 <li key={item.id} className="flex items-center justify-between gap-4 px-5 py-3 text-sm">
                   <Link to="/books/$id" params={{ id: item.book_id }} className="font-medium hover:underline">{item.title}</Link>
-                  <span className="text-xs text-muted-foreground">Qty {item.quantity} · ${Number(item.unit_price).toFixed(2)}</span>
+                  <span className="text-xs text-muted-foreground">Qty {item.quantity} · {formatPrice(Number(item.unit_price))}</span>
                 </li>
               ))}
             </ul>

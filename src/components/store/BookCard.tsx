@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import type { Book } from "@/types/book";
 import { useStore } from "@/context/StoreContext";
 import { Button } from "@/components/ui/button";
+import { formatPrice } from "@/lib/currency";
 
 export function Rating({ rating, count, compact = false }: { rating: number; count?: number; compact?: boolean }) {
   return <div className="flex items-center gap-1 text-[10px]"><span className="flex text-accent">{[1,2,3,4,5].map((n) => <Star key={n} className={`${compact ? "size-2.5" : "size-3"} fill-current`} />)}</span><span className="text-muted-foreground">{rating.toFixed(1)}{count ? ` (${count.toLocaleString()})` : ""}</span></div>;
@@ -16,7 +17,7 @@ export function BookCard({ book }: { book: Book }) {
       <Button variant="paper" size="icon" aria-label={wished ? `Remove ${book.title} from wishlist` : `Add ${book.title} to wishlist`} onClick={() => toggleWishlist(book.id)} className="absolute right-2 top-2 size-8 opacity-0 shadow-md transition group-hover:opacity-100 focus:opacity-100"><Heart className={wished ? "fill-current text-destructive" : ""} /></Button>
       {book.originalPrice && <span className="absolute left-2 top-2 rounded-sm bg-primary px-2 py-1 text-[9px] font-bold text-primary-foreground">SALE</span>}
     </div>
-    <div className="flex flex-1 flex-col p-3"><Link to="/books/$id" params={{ id: book.id }} className="line-clamp-2 min-h-10 font-display text-base font-semibold leading-5 hover:text-primary">{book.title}</Link><p className="mt-1 truncate text-[11px] text-muted-foreground">{book.author}</p><div className="mt-2"><Rating rating={book.rating} count={book.reviewCount} compact /></div><div className="mt-auto flex items-end justify-between gap-2 pt-3"><div><span className="font-bold">${book.price.toFixed(2)}</span>{book.originalPrice && <span className="ml-1 text-[10px] text-muted-foreground line-through">${book.originalPrice.toFixed(2)}</span>}</div><Button size="icon" variant="ghost" aria-label={`Add ${book.title} to cart`} onClick={() => addToCart(book.id)} className="size-8 border border-border group-hover:bg-primary group-hover:text-primary-foreground"><ShoppingBag /></Button></div></div>
+    <div className="flex flex-1 flex-col p-3"><Link to="/books/$id" params={{ id: book.id }} className="line-clamp-2 min-h-10 font-display text-base font-semibold leading-5 hover:text-primary">{book.title}</Link><p className="mt-1 truncate text-[11px] text-muted-foreground">{book.author}</p><div className="mt-2"><Rating rating={book.rating} count={book.reviewCount} compact /></div><div className="mt-auto flex items-end justify-between gap-2 pt-3"><div><span className="font-bold">{formatPrice(book.price)}</span>{book.originalPrice && <span className="ml-1 text-[10px] text-muted-foreground line-through">{formatPrice(book.originalPrice)}</span>}</div><Button size="icon" variant="ghost" aria-label={`Add ${book.title} to cart`} onClick={() => addToCart(book.id)} className="size-8 border border-border group-hover:bg-primary group-hover:text-primary-foreground"><ShoppingBag /></Button></div></div>
   </article>;
 }
 

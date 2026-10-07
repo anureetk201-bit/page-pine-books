@@ -48,7 +48,7 @@ export function AddBookForm({ onAdded }: { onAdded?: () => void }) {
         <label className="text-xs font-semibold">Title<input name="title" required className={input} /></label>
         <label className="text-xs font-semibold">Author<input name="author" required className={input} /></label>
         <label className="text-xs font-semibold">ISBN-13<input name="isbn" required pattern="[0-9Xx-]{10,17}" className={input} /></label>
-        <label className="text-xs font-semibold">Price (USD)<input name="price" type="number" step="0.01" min="0" required className={input} /></label>
+        <label className="text-xs font-semibold">Price (₹)<input name="price" type="number" step="1" min="0" required className={input} /></label>
         <label className="text-xs font-semibold">Category
           <select name="category" required className={input}>{categories.map((c) => <option key={c} value={c}>{c}</option>)}</select>
         </label>

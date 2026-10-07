@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { formatPrice } from "@/lib/currency";
 
 interface StockRow {
   id: string; title: string; author: string; category: string; price: number;
@@ -75,7 +76,7 @@ export function InventoryManager() {
                     <span className="block text-xs text-muted-foreground">{row.author}</span>
                   </td>
                   <td className="px-5 py-3 text-xs text-muted-foreground">{row.category}</td>
-                  <td className="px-5 py-3">${Number(row.price).toFixed(2)}</td>
+                  <td className="px-5 py-3">{formatPrice(Number(row.price))}</td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-2">
                       <input
