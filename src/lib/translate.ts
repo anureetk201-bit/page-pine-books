@@ -48,8 +48,8 @@ export function initSiteTranslation(code: string) {
     document.body.appendChild(el);
   }
   const g = window as unknown as Record<string, unknown>;
-  g.googleTranslateElementInit = () => {
-    const google = g.google as { translate: { TranslateElement: new (o: object, id: string) => unknown } };
+  g["googleTranslateElementInit"] = () => {
+    const google = g["google"] as { translate: { TranslateElement: new (o: object, id: string) => unknown } };
     new google.translate.TranslateElement({ pageLanguage: "en", autoDisplay: false }, "google_translate_element");
   };
   const script = document.createElement("script");
