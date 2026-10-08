@@ -36,3 +36,6 @@
 ## Customer care
 - [x] Customer support menu and help center
 - [x] Searchable all-language selector with persistent choice in the announcement bar
+
+## Storefront currency
+- [x] All book rates, cart, checkout, orders, and dashboard in Indian rupees
