@@ -6,6 +6,7 @@ import { useStore } from "@/context/StoreContext";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { languages } from "@/data/languages";
+import { applySiteLanguage, initSiteTranslation } from "@/lib/translate";
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { formatPrice, FREE_SHIPPING_THRESHOLD } from "@/lib/currency";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -34,12 +35,14 @@ export function Header() {
     const savedLanguage = window.localStorage.getItem("page-pine-language") ?? "en";
     setLanguage(savedLanguage);
     document.documentElement.lang = savedLanguage;
+    initSiteTranslation(savedLanguage);
   }, []);
   function changeLanguage(value: string) {
+    setLanguageOpen(false);
+    if (value === language) return;
     setLanguage(value);
     window.localStorage.setItem("page-pine-language", value);
-    document.documentElement.lang = value;
-    setLanguageOpen(false);
+    applySiteLanguage(value);
   }
   function submitSearch(event: React.FormEvent) { event.preventDefault(); if (query.trim()) { navigate({ to: "/search", search: { q: query.trim() } }); setSearchOpen(false); } }
   return <>
@@ -57,7 +60,7 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
           <Popover open={languageOpen} onOpenChange={setLanguageOpen}>
-            <PopoverTrigger asChild><Button variant="ghost" className="h-7 gap-1 px-2 text-[10px] uppercase text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" aria-label="Select language">{language}<ChevronDown className="size-3" /></Button></PopoverTrigger>
+            <PopoverTrigger asChild><Button variant="ghost" className="h-7 gap-1 px-2 text-[10px] uppercase text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" aria-label="Select language" translate="no">{language}<ChevronDown className="size-3" /></Button></PopoverTrigger>
             <PopoverContent align="end" className="w-64 p-0">
               <Command>
                 <CommandInput placeholder="Search languages…" aria-label="Search languages" />
