@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Brand } from "./Brand";
 import { Button } from "@/components/ui/button";
+import { PaymentBadges } from "./PaymentBadges";
 
 export function NewsletterForm({ compact = false }: { compact?: boolean }) {
   const [email, setEmail] = useState(""); const [done, setDone] = useState(false);
@@ -20,7 +21,7 @@ export function Footer() {
       <FooterCol title="Shop" links={[["All Books","/books"],["New Arrivals","/new-arrivals"],["Bestsellers","/bestsellers"],["Special Offers","/books"],["Gift Cards","/books"]]} />
       <FooterCol title="Help" links={[["FAQs","/about"],["Shipping & Delivery","/about"],["Returns & Refunds","/about"],["Track Order","/account"],["Contact Us","/about"]]} />
       <FooterCol title="About" links={[["Our Story","/about"],["Careers","/about"],["Blog","/about"],["Privacy Policy","/about"],["Terms & Conditions","/about"]]} />
-      <div><h3 className="footer-title">Newsletter</h3><p className="mb-4 text-xs text-primary-foreground/65">Join our community of readers.</p><NewsletterForm compact /><div className="mt-5 flex gap-2 text-[10px] font-bold"><span className="payment">VISA</span><span className="payment">●●</span><span className="payment">PayPal</span><span className="payment">Pay</span></div></div>
+      <div><h3 className="footer-title">Newsletter</h3><p className="mb-4 text-xs text-primary-foreground/65">Join our community of readers.</p><NewsletterForm compact /><div className="mt-5"><PaymentBadges /></div></div>
     </div>
     <div className="border-t border-primary-foreground/10 py-4 text-center text-[10px] text-primary-foreground/55">© 2026 Page & Pine Bookshop. All Rights Reserved.</div>
   </footer>;
