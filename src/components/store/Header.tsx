@@ -60,7 +60,7 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
           <Popover open={languageOpen} onOpenChange={setLanguageOpen}>
-            <PopoverTrigger asChild><Button variant="ghost" className="h-7 gap-1 px-2 text-[10px] uppercase text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" aria-label="Select language">{language}<ChevronDown className="size-3" /></Button></PopoverTrigger>
+            <PopoverTrigger asChild><Button variant="ghost" className="h-7 gap-1 px-2 text-[10px] uppercase text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" aria-label="Select language" translate="no">{language}<ChevronDown className="size-3" /></Button></PopoverTrigger>
             <PopoverContent align="end" className="w-64 p-0">
               <Command>
                 <CommandInput placeholder="Search languages…" aria-label="Search languages" />
