@@ -6,6 +6,7 @@ import { useStore } from "@/context/StoreContext";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { languages } from "@/data/languages";
+import { applySiteLanguage, initSiteTranslation } from "@/lib/translate";
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { formatPrice, FREE_SHIPPING_THRESHOLD } from "@/lib/currency";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -34,12 +35,14 @@ export function Header() {
     const savedLanguage = window.localStorage.getItem("page-pine-language") ?? "en";
     setLanguage(savedLanguage);
     document.documentElement.lang = savedLanguage;
+    initSiteTranslation(savedLanguage);
   }, []);
   function changeLanguage(value: string) {
+    setLanguageOpen(false);
+    if (value === language) return;
     setLanguage(value);
     window.localStorage.setItem("page-pine-language", value);
-    document.documentElement.lang = value;
-    setLanguageOpen(false);
+    applySiteLanguage(value);
   }
   function submitSearch(event: React.FormEvent) { event.preventDefault(); if (query.trim()) { navigate({ to: "/search", search: { q: query.trim() } }); setSearchOpen(false); } }
   return <>
