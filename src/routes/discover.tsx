@@ -4,7 +4,7 @@ import { Sparkles } from "lucide-react";
 import { useState } from "react";
 import { BookCard } from "@/components/store/BookCard";
 import { Button } from "@/components/ui/button";
-import { getBook } from "@/data/books";
+import { useCatalog } from "@/lib/catalog";
 import { discoverBooks, type DiscoveryResult } from "@/lib/discovery.functions";
 
 export const Route = createFileRoute("/discover")({
@@ -28,6 +28,7 @@ const prompts = [
 
 function DiscoverPage() {
   const runDiscovery = useServerFn(discoverBooks);
+  const catalog = useCatalog();
   const [query, setQuery] = useState("");
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<DiscoveryResult | null>(null);
@@ -80,7 +81,7 @@ function DiscoverPage() {
             {result.summary && <p className="mx-auto max-w-2xl text-center font-display text-2xl leading-8">{result.summary}</p>}
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {result.picks.map((pick) => {
-                const book = getBook(pick.id);
+                const book = catalog.find((b) => b.id === pick.id);
                 if (!book) return null;
                 return (
                   <div key={pick.id} className="space-y-3">

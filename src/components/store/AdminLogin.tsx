@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import heroImage from "@/assets/page-pine-hero.jpg";
 
 export function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -18,8 +19,10 @@ export function AdminLogin() {
   }
 
   return (
-    <main className="grid min-h-[560px] place-items-center bg-secondary px-4">
-      <form onSubmit={submit} className="w-full max-w-sm border border-border bg-card p-8 shadow-sm">
+    <main className="relative grid min-h-[560px] place-items-center overflow-hidden bg-secondary px-4 py-16">
+      <img src={heroImage} alt="" className="absolute inset-0 size-full object-cover object-[68%_center]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-secondary/85 via-secondary/55 to-primary/35" />
+      <form onSubmit={submit} className="relative w-full max-w-sm border border-border/60 bg-card/95 p-8 shadow-2xl backdrop-blur-sm">
         <div className="mx-auto grid size-12 place-items-center rounded-full bg-primary text-primary-foreground"><Lock className="size-5" /></div>
         <p className="eyebrow mt-5 text-center">Store owners only</p>
         <h1 className="mt-2 text-center font-display text-4xl">Admin sign in</h1>

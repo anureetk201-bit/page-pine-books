@@ -9,7 +9,7 @@ interface StockRow {
   stock_quantity: number; low_stock_threshold: number; available: boolean;
 }
 
-export function InventoryManager() {
+export function InventoryManager({ onChanged }: { onChanged?: () => void }) {
   const [rows, setRows] = useState<StockRow[]>([]);
   const [drafts, setDrafts] = useState<Record<string, number>>({});
   const [filter, setFilter] = useState("");
@@ -34,7 +34,7 @@ export function InventoryManager() {
       .update({ stock_quantity: Math.max(0, Math.round(next)), available: next > 0 })
       .eq("id", row.id);
     setMessage(error ? error.message : `${row.title} updated.`);
-    if (!error) await load();
+    if (!error) { await load(); onChanged?.(); }
   }
 
   const visible = rows.filter((row) => {

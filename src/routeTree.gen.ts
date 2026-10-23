@@ -14,13 +14,17 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as BestsellersRouteImport } from './routes/bestsellers'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as CareersRouteImport } from './routes/careers'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as NewArrivalsRouteImport } from './routes/new-arrivals'
 import { Route as OrdersRouteImport } from './routes/orders'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as SupportRouteImport } from './routes/support'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as AuthorsIndexRouteImport } from './routes/authors.index'
 import { Route as AuthorsIdRouteImport } from './routes/authors.$id'
@@ -54,6 +58,16 @@ const BestsellersRoute = BestsellersRouteImport.update({
   path: '/bestsellers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
@@ -79,6 +93,11 @@ const OrdersRoute = OrdersRouteImport.update({
   path: '/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -87,6 +106,11 @@ const SearchRoute = SearchRouteImport.update({
 const SupportRoute = SupportRouteImport.update({
   id: '/support',
   path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WishlistRoute = WishlistRouteImport.update({
@@ -131,13 +155,17 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
   '/bestsellers': typeof BestsellersRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/discover': typeof DiscoverRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
+  '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
   '/books/$id': typeof BooksIdRoute
@@ -152,13 +180,17 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
   '/bestsellers': typeof BestsellersRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/discover': typeof DiscoverRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
+  '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
   '/books/$id': typeof BooksIdRoute
@@ -174,13 +206,17 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
   '/bestsellers': typeof BestsellersRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/discover': typeof DiscoverRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/orders': typeof OrdersRoute
+  '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
   '/wishlist': typeof WishlistRoute
   '/authors/$id': typeof AuthorsIdRoute
   '/books/$id': typeof BooksIdRoute
@@ -197,13 +233,17 @@ export interface FileRouteTypes {
     | '/account'
     | '/admin'
     | '/bestsellers'
+    | '/blog'
+    | '/careers'
     | '/cart'
     | '/checkout'
     | '/discover'
     | '/new-arrivals'
     | '/orders'
+    | '/privacy'
     | '/search'
     | '/support'
+    | '/terms'
     | '/wishlist'
     | '/authors/$id'
     | '/books/$id'
@@ -218,13 +258,17 @@ export interface FileRouteTypes {
     | '/account'
     | '/admin'
     | '/bestsellers'
+    | '/blog'
+    | '/careers'
     | '/cart'
     | '/checkout'
     | '/discover'
     | '/new-arrivals'
     | '/orders'
+    | '/privacy'
     | '/search'
     | '/support'
+    | '/terms'
     | '/wishlist'
     | '/authors/$id'
     | '/books/$id'
@@ -239,13 +283,17 @@ export interface FileRouteTypes {
     | '/account'
     | '/admin'
     | '/bestsellers'
+    | '/blog'
+    | '/careers'
     | '/cart'
     | '/checkout'
     | '/discover'
     | '/new-arrivals'
     | '/orders'
+    | '/privacy'
     | '/search'
     | '/support'
+    | '/terms'
     | '/wishlist'
     | '/authors/$id'
     | '/books/$id'
@@ -261,13 +309,17 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   AdminRoute: typeof AdminRoute
   BestsellersRoute: typeof BestsellersRoute
+  BlogRoute: typeof BlogRoute
+  CareersRoute: typeof CareersRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   DiscoverRoute: typeof DiscoverRoute
   NewArrivalsRoute: typeof NewArrivalsRoute
   OrdersRoute: typeof OrdersRoute
+  PrivacyRoute: typeof PrivacyRoute
   SearchRoute: typeof SearchRoute
   SupportRoute: typeof SupportRoute
+  TermsRoute: typeof TermsRoute
   WishlistRoute: typeof WishlistRoute
   AuthorsIdRoute: typeof AuthorsIdRoute
   BooksIdRoute: typeof BooksIdRoute
@@ -314,6 +366,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BestsellersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cart': {
       id: '/cart'
       path: '/cart'
@@ -349,6 +415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -361,6 +434,13 @@ declare module '@tanstack/react-router' {
       path: '/support'
       fullPath: '/support'
       preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wishlist': {
@@ -421,13 +501,17 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   AdminRoute: AdminRoute,
   BestsellersRoute: BestsellersRoute,
+  BlogRoute: BlogRoute,
+  CareersRoute: CareersRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   DiscoverRoute: DiscoverRoute,
   NewArrivalsRoute: NewArrivalsRoute,
   OrdersRoute: OrdersRoute,
+  PrivacyRoute: PrivacyRoute,
   SearchRoute: SearchRoute,
   SupportRoute: SupportRoute,
+  TermsRoute: TermsRoute,
   WishlistRoute: WishlistRoute,
   AuthorsIdRoute: AuthorsIdRoute,
   BooksIdRoute: BooksIdRoute,

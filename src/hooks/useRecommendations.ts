@@ -3,10 +3,12 @@ import { useAuth } from "@/context/AuthContext";
 import { useStore } from "@/context/StoreContext";
 import { supabase } from "@/integrations/supabase/client";
 import { recommendBooks } from "@/lib/recommendations";
+import { useCatalog } from "@/lib/catalog";
 
 export function useRecommendations(limit = 6) {
   const { user } = useAuth();
   const { cart, wishlist } = useStore();
+  const catalog = useCatalog();
   const [purchased, setPurchased] = useState<string[]>([]);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export function useRecommendations(limit = 6) {
   );
 
   return useMemo(
-    () => ({ signals, books: recommendBooks(signals, limit), personalized: signals.length > 0 }),
-    [signals, limit],
+    () => ({ signals, books: recommendBooks(catalog, signals, limit), personalized: signals.length > 0 }),
+    [catalog, signals, limit],
   );
 }

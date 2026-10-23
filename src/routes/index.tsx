@@ -3,7 +3,8 @@ import type { LucideIcon } from "lucide-react";
 import { ArrowRight, BookOpen, Bookmark, Box, Heart, ShieldCheck, Tags, Truck, UsersRound } from "lucide-react";
 import heroImage from "@/assets/page-pine-hero.jpg";
 import newsletterImage from "@/assets/page-pine-newsletter.jpg";
-import { books, categories, categoryCopy, categoryImages } from "@/data/books";
+import { categories, categoryCopy, categoryImages } from "@/data/books";
+import { useCatalog } from "@/lib/catalog";
 import { BookCard } from "@/components/store/BookCard";
 import { Button } from "@/components/ui/button";
 import { NewsletterForm } from "@/components/store/Footer";
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/")({
  head:()=>({meta:[{title:"Page & Pine — Books for Every Mind & Moment"},{name:"description",content:"Discover bestselling fiction, timeless classics, thoughtful non-fiction, and new arrivals at Page & Pine Bookshop."},{property:"og:title",content:"Page & Pine — Books for Every Mind & Moment"},{property:"og:description",content:"A warmly curated independent bookshop for stories that stay."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component: Home,
 });
 
-function Home(){ const bestsellers=books.filter(b=>b.bestseller).slice(0,6); return <main>
+function Home(){ const bestsellers=useCatalog().filter(b=>b.bestseller).slice(0,6); return <main>
   <section className="relative -mt-[72px] bg-secondary pt-[72px]">
    <div className="relative min-h-[550px] overflow-hidden lg:min-h-[620px]">
     <img src={heroImage} width={1600} height={900} alt="Elegant stack of books with a vase and mug in warm morning light" className="absolute inset-0 size-full object-cover object-[68%_center]"/>

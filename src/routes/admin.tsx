@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -32,6 +33,8 @@ function AdminPage() {
   const [customers, setCustomers] = useState(0);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
+  const [inventoryVersion, setInventoryVersion] = useState(0);
+  const queryClient = useQueryClient();
 
   const loadData = useCallback(async () => {
     const [orderResult, profileResult] = await Promise.all([
@@ -64,7 +67,7 @@ function AdminPage() {
     await loadData();
   }
 
-  if (loading) return <main className="grid min-h-[520px] place-items-center bg-secondary"><p className="eyebrow">Checking access…</p></main>;
+  if (loading || (user && isAdmin === null)) return <main className="grid min-h-[520px] place-items-center bg-secondary"><p className="eyebrow">Checking access…</p></main>;
 
   if (!user) return <AdminLogin />;
 
@@ -137,8 +140,8 @@ function AdminPage() {
         </section>
       </div>
 
-      <AddBookForm />
-      <InventoryManager />
+      <AddBookForm onAdded={() => { setInventoryVersion((v) => v + 1); void queryClient.invalidateQueries({ queryKey: ["catalog"] }); }} />
+      <InventoryManager key={inventoryVersion} onChanged={() => void queryClient.invalidateQueries({ queryKey: ["catalog"] })} />
     </main>
   );
 }

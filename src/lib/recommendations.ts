@@ -1,11 +1,10 @@
-import { books } from "@/data/books";
 import type { Book } from "@/types/book";
 
 /**
  * Scores the catalogue against the reader's own signals (past orders, wishlist,
  * and bag) so recommendations lean toward the categories and authors they love.
  */
-export function recommendBooks(signalIds: string[], limit = 6): Book[] {
+export function recommendBooks(books: Book[], signalIds: string[], limit = 6): Book[] {
   const seen = new Set(signalIds);
   const liked = signalIds.map((id) => books.find((book) => book.id === id)).filter((book): book is Book => Boolean(book));
 

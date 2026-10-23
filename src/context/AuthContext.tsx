@@ -14,10 +14,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    void supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user ?? null);
-      setLoading(false);
-    });
+    // Never leave account pages stuck on a loading screen if the auth server is slow or unreachable.
+    void supabase.auth
+      .getSession()
+      .then(({ data }) => setUser(data.session?.user ?? null))
+      .catch(() => setUser(null))
+      .finally(() => setLoading(false));
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       setUser(session?.user ?? null);
