@@ -1,10 +1,10 @@
 import type { Book, Category } from "@/types/book";
-import fictionImage from "@/assets/cat-fiction.jpg";
-import nonfictionImage from "@/assets/cat-nonfiction.jpg";
-import selfhelpImage from "@/assets/cat-selfhelp.jpg";
-import romanceImage from "@/assets/cat-romance.jpg";
-import childrenImage from "@/assets/cat-children.jpg";
-import classicsImage from "@/assets/cat-classics.jpg";
+import fictionImage from "@/assets/cat-fiction.webp";
+import nonfictionImage from "@/assets/cat-nonfiction.webp";
+import selfhelpImage from "@/assets/cat-selfhelp.webp";
+import romanceImage from "@/assets/cat-romance.webp";
+import childrenImage from "@/assets/cat-children.webp";
+import classicsImage from "@/assets/cat-classics.webp";
 
 const cover = (isbn: string) => `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
 const common = {

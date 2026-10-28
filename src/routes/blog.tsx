@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import newsletterImage from "@/assets/page-pine-newsletter.jpg";
-import fictionImage from "@/assets/cat-fiction.jpg";
-import selfhelpImage from "@/assets/cat-selfhelp.jpg";
-import classicsImage from "@/assets/cat-classics.jpg";
+import newsletterImage from "@/assets/page-pine-newsletter.webp";
+import fictionImage from "@/assets/cat-fiction.webp";
+import selfhelpImage from "@/assets/cat-selfhelp.webp";
+import classicsImage from "@/assets/cat-classics.webp";
 import { InfoHero } from "@/components/store/InfoHero";
 
 export const Route = createFileRoute("/blog")({

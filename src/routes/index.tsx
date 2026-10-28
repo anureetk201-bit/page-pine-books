@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, BookOpen, Bookmark, Box, Heart, ShieldCheck, Tags, Truck, UsersRound } from "lucide-react";
-import heroImage from "@/assets/page-pine-hero.jpg";
-import newsletterImage from "@/assets/page-pine-newsletter.jpg";
+import heroImage from "@/assets/page-pine-hero.webp";
+import newsletterImage from "@/assets/page-pine-newsletter.webp";
 import { categories, categoryCopy, categoryImages } from "@/data/books";
 import { useCatalog } from "@/lib/catalog";
 import { BookCard } from "@/components/store/BookCard";
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
 function Home(){ const bestsellers=useCatalog().filter(b=>b.bestseller).slice(0,6); return <main>
   <section className="relative -mt-[72px] bg-secondary pt-[72px]">
    <div className="relative min-h-[550px] overflow-hidden lg:min-h-[620px]">
-    <img src={heroImage} width={1600} height={900} alt="Elegant stack of books with a vase and mug in warm morning light" className="absolute inset-0 size-full object-cover object-[68%_center]"/>
+    <img src={heroImage} width={1600} height={900} alt="Elegant stack of books with a vase and mug in warm morning light" data-parallax="0.3" fetchPriority="high" decoding="async" className="absolute inset-0 size-full object-cover object-[68%_center]"/>
     <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-secondary/10 lg:via-secondary/55"/>
     <div className="absolute inset-0 bg-foreground/8"/>
     <div className="page-container relative z-10 flex min-h-[550px] flex-col justify-center pb-10 pt-10 lg:min-h-[620px] lg:py-16">

@@ -1,4 +1,4 @@
-import heroImage from "@/assets/page-pine-hero.jpg";
+import heroImage from "@/assets/page-pine-hero.webp";
 
 /** Image-backed page header in the same style as the home and about pages. */
 export function InfoHero({ eyebrow, title, copy, image = heroImage }: { eyebrow: string; title: string; copy?: string; image?: string }) {

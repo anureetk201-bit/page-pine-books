@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import heroImage from "@/assets/page-pine-hero.jpg";
+import { adminSignIn } from "@/lib/admin-auth.functions";
+import heroImage from "@/assets/page-pine-hero.webp";
 
 export function AdminLogin() {
-  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -13,9 +14,24 @@ export function AdminLogin() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true); setError("");
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
-    if (signInError) setError(signInError.message);
-    setBusy(false);
+    try {
+      // An email signs in an owner account directly; anything else is the store's fixed admin ID.
+      if (id.includes("@")) {
+        const { error: signInError } = await supabase.auth.signInWithPassword({ email: id.trim(), password });
+        if (signInError) setError(signInError.message);
+      } else {
+        const result = await adminSignIn({ data: { id, password } });
+        if (!result.ok) setError(result.error);
+        else {
+          const { error: sessionError } = await supabase.auth.setSession({ access_token: result.access_token, refresh_token: result.refresh_token });
+          if (sessionError) setError(sessionError.message);
+        }
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Sign-in failed. Please try again.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -26,8 +42,8 @@ export function AdminLogin() {
         <div className="mx-auto grid size-12 place-items-center rounded-full bg-primary text-primary-foreground"><Lock className="size-5" /></div>
         <p className="eyebrow mt-5 text-center">Store owners only</p>
         <h1 className="mt-2 text-center font-display text-4xl">Admin sign in</h1>
-        <label className="mt-6 block text-xs font-semibold">Email
-          <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" className="mt-1 h-11 w-full border border-input bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
+        <label className="mt-6 block text-xs font-semibold">Admin ID
+          <input type="text" required value={id} onChange={(e) => setId(e.target.value)} autoComplete="username" autoCapitalize="none" spellCheck={false} className="mt-1 h-11 w-full border border-input bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
         </label>
         <label className="mt-4 block text-xs font-semibold">Password
           <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" className="mt-1 h-11 w-full border border-input bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring" />

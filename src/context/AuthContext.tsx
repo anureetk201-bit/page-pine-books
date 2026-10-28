@@ -5,9 +5,11 @@ import { supabase } from "@/integrations/supabase/client";
 interface AuthValue {
   user: User | null;
   loading: boolean;
+  /** Sets the signed-in user straight from a sign-in response, so the page never waits on an auth event. */
+  setSignedInUser: (user: User | null) => void;
 }
 
-const AuthContext = createContext<AuthValue>({ user: null, loading: true });
+const AuthContext = createContext<AuthValue>({ user: null, loading: true, setSignedInUser: () => {} });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -21,14 +23,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
+      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED" && event !== "PASSWORD_RECOVERY") return;
       setUser(session?.user ?? null);
       setLoading(false);
     });
     return () => data.subscription.unsubscribe();
   }, []);
 
-  const value = useMemo(() => ({ user, loading }), [user, loading]);
+  const value = useMemo(() => ({ user, loading, setSignedInUser: setUser }), [user, loading]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

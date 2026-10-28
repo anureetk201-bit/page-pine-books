@@ -15,6 +15,7 @@ import { StoreProvider } from "../context/StoreContext";
 import { Header } from "../components/store/Header";
 import { Footer } from "../components/store/Footer";
 import { AuthProvider } from "../context/AuthContext";
+import { ScrollEffects } from "../components/store/ScrollEffects";
 
 function NotFoundComponent() {
   return (
@@ -127,6 +128,7 @@ function RootComponent() {
       <AuthProvider>
         <StoreProvider>
           <div className="min-h-screen bg-background">
+            <ScrollEffects />
             <Header />
             <Outlet />
             <Footer />

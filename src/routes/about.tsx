@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookOpen, Heart, Leaf, Sparkles, type LucideIcon } from "lucide-react";
-import heroImage from "@/assets/page-pine-hero.jpg";
-import newsletterImage from "@/assets/page-pine-newsletter.jpg";
+import heroImage from "@/assets/page-pine-hero.webp";
+import newsletterImage from "@/assets/page-pine-newsletter.webp";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/about")({
