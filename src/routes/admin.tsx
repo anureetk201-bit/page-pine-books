@@ -47,9 +47,9 @@ export const Route = createFileRoute("/admin")({
 
 function AdminPage() {
   const { user, loading } = useAuth();
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState("");
+  // Tied to the user it was checked for, so switching accounts never shows the previous verdict.
+  const [access, setAccess] = useState<{ userId: string; isAdmin: boolean } | null>(null);
+  const isAdmin = user && access?.userId === user.id ? access.isAdmin : null;
   const queryClient = useQueryClient();
   const tab = Route.useSearch().tab ?? "overview";
   const navigate = Route.useNavigate();
@@ -59,24 +59,17 @@ function AdminPage() {
   };
 
   useEffect(() => {
-    if (!user) {
-      setIsAdmin(null);
-      return;
-    }
+    if (!user) return;
+    let active = true;
     void supabase
       .rpc("has_role", { _user_id: user.id, _role: "admin" })
-      .then(({ data }) => setIsAdmin(Boolean(data)));
+      .then(({ data }) => {
+        if (active) setAccess({ userId: user.id, isAdmin: Boolean(data) });
+      });
+    return () => {
+      active = false;
+    };
   }, [user]);
-
-  async function claimAdmin() {
-    setBusy(true);
-    setMessage("");
-    const { data, error } = await supabase.rpc("claim_first_admin");
-    if (error) setMessage(error.message);
-    else if (data) setIsAdmin(true);
-    else setMessage("This store already has an owner. Ask them to grant you access.");
-    setBusy(false);
-  }
 
   if (loading || (user && isAdmin === null))
     return (
@@ -94,16 +87,12 @@ function AdminPage() {
           <p className="eyebrow">Store dashboard</p>
           <h1 className="mt-2 font-display text-4xl">Owner access required</h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            If this is your store and nobody has claimed it yet, you can take ownership now.
+            This account can&apos;t open the store dashboard. Sign out, then sign in with the
+            store&apos;s admin ID.
           </p>
-          <Button className="mt-6" disabled={busy} onClick={() => void claimAdmin()}>
-            {busy ? "Please wait…" : "Claim store ownership"}
+          <Button className="mt-6" onClick={() => void supabase.auth.signOut()}>
+            Sign out
           </Button>
-          {message && (
-            <p className="mt-4 text-xs text-muted-foreground" role="status">
-              {message}
-            </p>
-          )}
         </div>
       </main>
     );

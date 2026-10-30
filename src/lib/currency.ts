@@ -11,8 +11,10 @@ export function formatPrice(value: number) {
   return inr.format(Math.round(Number.isFinite(value) ? value : 0));
 }
 
+// The place_order database function charges these same amounts; change both together.
+
 /** Rupee value at which an order ships free. */
-export const FREE_SHIPPING_THRESHOLD = 499;
+export const FREE_SHIPPING_THRESHOLD = 999;
 
 /** Flat shipping charge for orders below the free-shipping threshold. */
 export const SHIPPING_FEE = 49;

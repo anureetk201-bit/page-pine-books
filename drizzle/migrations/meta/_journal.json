@@ -43,6 +43,13 @@
       "when": 1791366252307,
       "tag": "0005_prices_to_rupees",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793318400000,
+      "tag": "0006_secure_orders_and_admin",
+      "breakpoints": true
     }
   ]
 }

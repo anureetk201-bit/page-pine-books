@@ -27,11 +27,13 @@ export function InventoryManager({ onChanged }: { onChanged?: () => void }) {
   useEffect(() => { void load(); }, [load]);
 
   async function save(row: StockRow) {
-    const next = drafts[row.id];
-    if (next === undefined || next === row.stock_quantity) return;
+    const draft = drafts[row.id];
+    if (draft === undefined) return;
+    const next = Math.max(0, Math.round(draft || 0));
+    if (next === row.stock_quantity) return;
     const { error } = await supabase
       .from("books")
-      .update({ stock_quantity: Math.max(0, Math.round(next)), available: next > 0 })
+      .update({ stock_quantity: next, available: next > 0 })
       .eq("id", row.id);
     setMessage(error ? error.message : `${row.title} updated.`);
     if (!error) { await load(); onChanged?.(); }
