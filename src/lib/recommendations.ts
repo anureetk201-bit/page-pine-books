@@ -6,7 +6,9 @@ import type { Book } from "@/types/book";
  */
 export function recommendBooks(books: Book[], signalIds: string[], limit = 6): Book[] {
   const seen = new Set(signalIds);
-  const liked = signalIds.map((id) => books.find((book) => book.id === id)).filter((book): book is Book => Boolean(book));
+  const liked = signalIds
+    .map((id) => books.find((book) => book.id === id))
+    .filter((book): book is Book => Boolean(book));
 
   const categoryWeight = new Map<string, number>();
   const authorWeight = new Map<string, number>();

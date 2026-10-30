@@ -5,11 +5,115 @@ import newsletterImage from "@/assets/page-pine-newsletter.webp";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [{ title: "Our Story — Page & Pine" }, { name: "description", content: "Meet Page & Pine, an independent bookshop for thoughtful readers and unforgettable stories." }, { property: "og:title", content: "Our Story — Page & Pine" }, { property: "og:description", content: "An independent bookshop built around thoughtful discovery." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({
+    meta: [
+      { title: "Our Story — Page & Pine" },
+      {
+        name: "description",
+        content:
+          "Meet Page & Pine, an independent bookshop for thoughtful readers and unforgettable stories.",
+      },
+      { property: "og:title", content: "Our Story — Page & Pine" },
+      {
+        property: "og:description",
+        content: "An independent bookshop built around thoughtful discovery.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: AboutPage,
 });
 
 function AboutPage() {
-  const values: [LucideIcon, string, string][] = [[BookOpen, "Curated with purpose", "Every title is chosen to invite thought, delight, or discovery."], [Heart, "Made for readers", "Human recommendations and a quiet respect for your reading life."], [Leaf, "Rooted in longevity", "Enduring stories and considered choices over passing trends."]];
-  return <main><section className="relative min-h-[560px] overflow-hidden"><img src={heroImage} alt="Books, ceramics, and greenery in the Page & Pine studio" className="absolute inset-0 size-full object-cover object-center"/><div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary/10"/><div className="page-container relative flex min-h-[560px] items-center"><div className="max-w-2xl text-primary-foreground"><p className="eyebrow text-accent">Our story</p><h1 className="mt-4 font-display text-5xl leading-none sm:text-7xl">A home for stories that stay.</h1><p className="mt-6 max-w-lg text-sm leading-7 text-primary-foreground/80">Page & Pine began with a simple belief: the right book can shift a perspective, kindle courage, or become a lifelong companion.</p></div></div></section><section className="page-container grid gap-12 py-20 md:grid-cols-[.85fr_1.15fr]"><div><p className="eyebrow">Thoughtfully independent</p><h2 className="mt-3 font-display text-4xl leading-tight sm:text-5xl">Selected with care,<br/>never by noise.</h2></div><div className="space-y-5 text-sm leading-7 text-muted-foreground"><p>Our shelves bring together enduring classics, modern voices, big ideas, and gentle escapes. Every title earns its place through craft, curiosity, and the promise of a memorable reading experience.</p><p>We pair the warmth of a neighborhood bookshop with the ease of discovering your next read from anywhere. The result is a collection that feels personal—not endless.</p><div className="flex items-center gap-3 pt-3 text-foreground"><Sparkles className="size-5 text-accent"/><span className="font-display text-xl">Books that inspire. Stories that stay.</span></div></div></section><section className="bg-secondary"><div className="page-container grid gap-px bg-border py-14 md:grid-cols-3">{values.map(([Icon,title,copy])=><article key={title} className="bg-secondary p-8"><Icon className="size-8 stroke-1"/><h2 className="mt-5 font-display text-2xl">{title}</h2><p className="mt-2 text-sm leading-6 text-muted-foreground">{copy}</p></article>)}</div></section><section className="page-container grid items-center gap-10 py-20 md:grid-cols-2"><img src={newsletterImage} alt="An open book and coffee in a comfortable reading corner" loading="lazy" className="aspect-[4/3] size-full object-cover"/><div><p className="eyebrow">The Page & Pine promise</p><h2 className="mt-3 font-display text-4xl leading-tight sm:text-5xl">Your next favorite book should feel like a discovery.</h2><p className="mt-5 text-sm leading-7 text-muted-foreground">Whether you arrive knowing exactly what you want or simply looking for a spark, we make the path to your next story calm, beautiful, and rewarding.</p><Button asChild className="mt-7"><Link to="/books">Browse the collection</Link></Button></div></section></main>;
+  const values: [LucideIcon, string, string][] = [
+    [
+      BookOpen,
+      "Curated with purpose",
+      "Every title is chosen to invite thought, delight, or discovery.",
+    ],
+    [Heart, "Made for readers", "Human recommendations and a quiet respect for your reading life."],
+    [Leaf, "Rooted in longevity", "Enduring stories and considered choices over passing trends."],
+  ];
+  return (
+    <main>
+      <section className="relative min-h-[560px] overflow-hidden">
+        <img
+          src={heroImage}
+          alt="Books, ceramics, and greenery in the Page & Pine studio"
+          className="absolute inset-0 size-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary/10" />
+        <div className="page-container relative flex min-h-[560px] items-center">
+          <div className="max-w-2xl text-primary-foreground">
+            <p className="eyebrow text-accent">Our story</p>
+            <h1 className="mt-4 font-display text-5xl leading-none sm:text-7xl">
+              A home for stories that stay.
+            </h1>
+            <p className="mt-6 max-w-lg text-sm leading-7 text-primary-foreground/80">
+              Page & Pine began with a simple belief: the right book can shift a perspective, kindle
+              courage, or become a lifelong companion.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="page-container grid gap-12 py-20 md:grid-cols-[.85fr_1.15fr]">
+        <div>
+          <p className="eyebrow">Thoughtfully independent</p>
+          <h2 className="mt-3 font-display text-4xl leading-tight sm:text-5xl">
+            Selected with care,
+            <br />
+            never by noise.
+          </h2>
+        </div>
+        <div className="space-y-5 text-sm leading-7 text-muted-foreground">
+          <p>
+            Our shelves bring together enduring classics, modern voices, big ideas, and gentle
+            escapes. Every title earns its place through craft, curiosity, and the promise of a
+            memorable reading experience.
+          </p>
+          <p>
+            We pair the warmth of a neighborhood bookshop with the ease of discovering your next
+            read from anywhere. The result is a collection that feels personal—not endless.
+          </p>
+          <div className="flex items-center gap-3 pt-3 text-foreground">
+            <Sparkles className="size-5 text-accent" />
+            <span className="font-display text-xl">Books that inspire. Stories that stay.</span>
+          </div>
+        </div>
+      </section>
+      <section className="bg-secondary">
+        <div className="page-container grid gap-px bg-border py-14 md:grid-cols-3">
+          {values.map(([Icon, title, copy]) => (
+            <article key={title} className="bg-secondary p-8">
+              <Icon className="size-8 stroke-1" />
+              <h2 className="mt-5 font-display text-2xl">{title}</h2>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="page-container grid items-center gap-10 py-20 md:grid-cols-2">
+        <img
+          src={newsletterImage}
+          alt="An open book and coffee in a comfortable reading corner"
+          loading="lazy"
+          className="aspect-[4/3] size-full object-cover"
+        />
+        <div>
+          <p className="eyebrow">The Page & Pine promise</p>
+          <h2 className="mt-3 font-display text-4xl leading-tight sm:text-5xl">
+            Your next favorite book should feel like a discovery.
+          </h2>
+          <p className="mt-5 text-sm leading-7 text-muted-foreground">
+            Whether you arrive knowing exactly what you want or simply looking for a spark, we make
+            the path to your next story calm, beautiful, and rewarding.
+          </p>
+          <Button asChild className="mt-7">
+            <Link to="/books">Browse the collection</Link>
+          </Button>
+        </div>
+      </section>
+    </main>
+  );
 }

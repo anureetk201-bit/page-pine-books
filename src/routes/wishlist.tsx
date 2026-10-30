@@ -1,3 +1,45 @@
-import { createFileRoute,Link } from "@tanstack/react-router"; import { Heart } from "lucide-react"; import { useCatalog } from "@/lib/catalog"; import { BookGrid } from "@/components/store/BookCard"; import { PageIntro } from "@/components/store/PageIntro"; import { Button } from "@/components/ui/button"; import { useStore } from "@/context/StoreContext";
-export const Route=createFileRoute("/wishlist")({head:()=>({meta:[{title:"My Wishlist — Page & Pine"},{name:"description",content:"Your saved Page & Pine books."},{property:"og:title",content:"My Wishlist — Page & Pine"},{property:"og:description",content:"Books saved for later."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:Page});
-function Page(){const {wishlist}=useStore();const saved=useCatalog().filter(b=>wishlist.includes(b.id));return <><PageIntro eyebrow="Saved for later" title="My Wishlist"/><main className="page-container py-10">{saved.length?<BookGrid books={saved}/>:<div className="py-20 text-center"><Heart className="mx-auto size-10 stroke-1"/><h2 className="mt-4 font-display text-3xl">Your wishlist is waiting</h2><p className="mt-2 text-sm text-muted-foreground">Save books you would love to read next.</p><Button asChild className="mt-6"><Link to="/books">Browse books</Link></Button></div>}</main></>}
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Heart } from "lucide-react";
+import { useCatalog } from "@/lib/catalog";
+import { BookGrid } from "@/components/store/BookCard";
+import { PageIntro } from "@/components/store/PageIntro";
+import { Button } from "@/components/ui/button";
+import { useStore } from "@/context/StoreContext";
+export const Route = createFileRoute("/wishlist")({
+  head: () => ({
+    meta: [
+      { title: "My Wishlist — Page & Pine" },
+      { name: "description", content: "Your saved Page & Pine books." },
+      { property: "og:title", content: "My Wishlist — Page & Pine" },
+      { property: "og:description", content: "Books saved for later." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Page,
+});
+function Page() {
+  const { wishlist } = useStore();
+  const saved = useCatalog().filter((b) => wishlist.includes(b.id));
+  return (
+    <>
+      <PageIntro eyebrow="Saved for later" title="My Wishlist" />
+      <main className="page-container py-10">
+        {saved.length ? (
+          <BookGrid books={saved} />
+        ) : (
+          <div className="py-20 text-center">
+            <Heart className="mx-auto size-10 stroke-1" />
+            <h2 className="mt-4 font-display text-3xl">Your wishlist is waiting</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Save books you would love to read next.
+            </p>
+            <Button asChild className="mt-6">
+              <Link to="/books">Browse books</Link>
+            </Button>
+          </div>
+        )}
+      </main>
+    </>
+  );
+}

@@ -61,11 +61,9 @@ function AdminPage() {
   useEffect(() => {
     if (!user) return;
     let active = true;
-    void supabase
-      .rpc("has_role", { _user_id: user.id, _role: "admin" })
-      .then(({ data }) => {
-        if (active) setAccess({ userId: user.id, isAdmin: Boolean(data) });
-      });
+    void supabase.rpc("has_role", { _user_id: user.id, _role: "admin" }).then(({ data }) => {
+      if (active) setAccess({ userId: user.id, isAdmin: Boolean(data) });
+    });
     return () => {
       active = false;
     };
@@ -124,7 +122,7 @@ function AdminPage() {
       <div className="mt-8 grid gap-8 lg:grid-cols-[200px_1fr]">
         <nav
           aria-label="Dashboard sections"
-          className="-mx-1 flex gap-1 overflow-x-auto lg:mx-0 lg:flex-col lg:self-start lg:sticky lg:top-6"
+          className="-mx-1 flex gap-1 overflow-x-auto lg:mx-0 lg:flex-col lg:self-start lg:sticky lg:top-24"
         >
           {tabs.map(({ id, label, icon: Icon }) => (
             <button

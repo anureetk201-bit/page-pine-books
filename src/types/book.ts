@@ -1,4 +1,5 @@
-export type Category = "Fiction" | "Non-Fiction" | "Self-Help" | "Romance" | "Children" | "Classics";
+export type Category =
+  "Fiction" | "Non-Fiction" | "Self-Help" | "Romance" | "Children" | "Classics";
 
 export interface Book {
   id: string;
@@ -22,4 +23,7 @@ export interface Book {
   available: boolean;
 }
 
-export interface CartLine { bookId: string; quantity: number }
+export interface CartLine {
+  bookId: string;
+  quantity: number;
+}

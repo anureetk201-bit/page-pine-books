@@ -1,4 +1,12 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import type { CartLine } from "@/types/book";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
@@ -19,7 +27,11 @@ const StoreContext = createContext<StoreValue | undefined>(undefined);
 
 function readStorage<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
-  try { return JSON.parse(window.localStorage.getItem(key) ?? "") as T; } catch { return fallback; }
+  try {
+    return JSON.parse(window.localStorage.getItem(key) ?? "") as T;
+  } catch {
+    return fallback;
+  }
 }
 
 /** The most copies of one book a cart line can hold (the cart_items table enforces the same cap). */
@@ -50,7 +62,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       supabase.from("wishlist_items").select("book_id").eq("user_id", user.id),
     ]).then(([cartResult, wishlistResult]) => {
       if (!active) return;
-      const savedCart = (cartResult.data ?? []).map((row) => ({ bookId: row.book_id, quantity: row.quantity }));
+      const savedCart = (cartResult.data ?? []).map((row) => ({
+        bookId: row.book_id,
+        quantity: row.quantity,
+      }));
       const savedWishlist = (wishlistResult.data ?? []).map((row) => row.book_id);
 
       // Fold anything picked while signed out into the account, then forget the guest copy.
@@ -64,23 +79,32 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       }
       const newWishlist = guestWishlist.filter((id) => !savedWishlist.includes(id));
       if (guestCart.length)
-        void supabase.from("cart_items").upsert(
-          mergedCart
-            .filter((line) => guestCart.some((guest) => guest.bookId === line.bookId))
-            .map((line) => ({ user_id: user.id, book_id: line.bookId, quantity: line.quantity })),
-        );
+        void supabase
+          .from("cart_items")
+          .upsert(
+            mergedCart
+              .filter((line) => guestCart.some((guest) => guest.bookId === line.bookId))
+              .map((line) => ({ user_id: user.id, book_id: line.bookId, quantity: line.quantity })),
+          );
       if (newWishlist.length)
-        void supabase.from("wishlist_items").upsert(newWishlist.map((id) => ({ user_id: user.id, book_id: id })), { ignoreDuplicates: true });
+        void supabase.from("wishlist_items").upsert(
+          newWishlist.map((id) => ({ user_id: user.id, book_id: id })),
+          { ignoreDuplicates: true },
+        );
       try {
         window.localStorage.removeItem(CART_KEY);
         window.localStorage.removeItem(WISHLIST_KEY);
-      } catch { /* storage unavailable */ }
+      } catch {
+        /* storage unavailable */
+      }
 
       setCart(mergedCart);
       setWishlist([...savedWishlist, ...newWishlist]);
       setOwner(user.id);
     });
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, [authLoading, user]);
 
   // Only a guest's own cart is kept in the browser, never an account cart left over after sign-out.
@@ -94,33 +118,91 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     window.localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
   }, [wishlist, isGuestCart]);
 
-  const addToCart = useCallback((bookId: string, quantity = 1) => setCart((current) => {
-    const found = current.find((line) => line.bookId === bookId);
-    const nextQuantity = clampQuantity((found?.quantity ?? 0) + quantity);
-    if (nextQuantity < 1) return current;
-    if (user) void supabase.from("cart_items").upsert({ user_id: user.id, book_id: bookId, quantity: nextQuantity });
-    return found ? current.map((line) => line.bookId === bookId ? { ...line, quantity: nextQuantity } : line) : [...current, { bookId, quantity: nextQuantity }];
-  }), [user]);
-  const updateQuantity = useCallback((bookId: string, requested: number) => setCart((current) => {
-    const quantity = clampQuantity(requested);
-    if (user) void (quantity < 1 ? supabase.from("cart_items").delete().eq("user_id", user.id).eq("book_id", bookId) : supabase.from("cart_items").update({ quantity }).eq("user_id", user.id).eq("book_id", bookId));
-    return quantity < 1 ? current.filter((line) => line.bookId !== bookId) : current.map((line) => line.bookId === bookId ? { ...line, quantity } : line);
-  }), [user]);
-  const removeFromCart = useCallback((bookId: string) => setCart((current) => {
-    if (user) void supabase.from("cart_items").delete().eq("user_id", user.id).eq("book_id", bookId);
-    return current.filter((line) => line.bookId !== bookId);
-  }), [user]);
+  const addToCart = useCallback(
+    (bookId: string, quantity = 1) =>
+      setCart((current) => {
+        const found = current.find((line) => line.bookId === bookId);
+        const nextQuantity = clampQuantity((found?.quantity ?? 0) + quantity);
+        if (nextQuantity < 1) return current;
+        if (user)
+          void supabase
+            .from("cart_items")
+            .upsert({ user_id: user.id, book_id: bookId, quantity: nextQuantity });
+        return found
+          ? current.map((line) =>
+              line.bookId === bookId ? { ...line, quantity: nextQuantity } : line,
+            )
+          : [...current, { bookId, quantity: nextQuantity }];
+      }),
+    [user],
+  );
+  const updateQuantity = useCallback(
+    (bookId: string, requested: number) =>
+      setCart((current) => {
+        const quantity = clampQuantity(requested);
+        if (user)
+          void (quantity < 1
+            ? supabase.from("cart_items").delete().eq("user_id", user.id).eq("book_id", bookId)
+            : supabase
+                .from("cart_items")
+                .update({ quantity })
+                .eq("user_id", user.id)
+                .eq("book_id", bookId));
+        return quantity < 1
+          ? current.filter((line) => line.bookId !== bookId)
+          : current.map((line) => (line.bookId === bookId ? { ...line, quantity } : line));
+      }),
+    [user],
+  );
+  const removeFromCart = useCallback(
+    (bookId: string) =>
+      setCart((current) => {
+        if (user)
+          void supabase.from("cart_items").delete().eq("user_id", user.id).eq("book_id", bookId);
+        return current.filter((line) => line.bookId !== bookId);
+      }),
+    [user],
+  );
   const clearCart = useCallback(() => {
     if (user) void supabase.from("cart_items").delete().eq("user_id", user.id);
     setCart([]);
   }, [user]);
-  const toggleWishlist = useCallback((bookId: string) => setWishlist((current) => {
-    const exists = current.includes(bookId);
-    if (user) void (exists ? supabase.from("wishlist_items").delete().eq("user_id", user.id).eq("book_id", bookId) : supabase.from("wishlist_items").insert({ user_id: user.id, book_id: bookId }));
-    return exists ? current.filter((id) => id !== bookId) : [...current, bookId];
-  }), [user]);
+  const toggleWishlist = useCallback(
+    (bookId: string) =>
+      setWishlist((current) => {
+        const exists = current.includes(bookId);
+        if (user)
+          void (exists
+            ? supabase.from("wishlist_items").delete().eq("user_id", user.id).eq("book_id", bookId)
+            : supabase.from("wishlist_items").insert({ user_id: user.id, book_id: bookId }));
+        return exists ? current.filter((id) => id !== bookId) : [...current, bookId];
+      }),
+    [user],
+  );
   const isWishlisted = useCallback((bookId: string) => wishlist.includes(bookId), [wishlist]);
-  const value = useMemo(() => ({ cart, wishlist, cartCount: cart.reduce((sum, line) => sum + line.quantity, 0), addToCart, updateQuantity, removeFromCart, clearCart, toggleWishlist, isWishlisted }), [cart, wishlist, addToCart, updateQuantity, removeFromCart, clearCart, toggleWishlist, isWishlisted]);
+  const value = useMemo(
+    () => ({
+      cart,
+      wishlist,
+      cartCount: cart.reduce((sum, line) => sum + line.quantity, 0),
+      addToCart,
+      updateQuantity,
+      removeFromCart,
+      clearCart,
+      toggleWishlist,
+      isWishlisted,
+    }),
+    [
+      cart,
+      wishlist,
+      addToCart,
+      updateQuantity,
+      removeFromCart,
+      clearCart,
+      toggleWishlist,
+      isWishlisted,
+    ],
+  );
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }
 

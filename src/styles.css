@@ -30,7 +30,8 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  /* Keep jump-to-section targets clear of the sticky header. */
+  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
   body { margin: 0; background: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); letter-spacing: 0; }
   button, a, input, select, textarea { outline-color: var(--color-ring); }
   :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }

@@ -9,7 +9,11 @@ interface AuthValue {
   setSignedInUser: (user: User | null) => void;
 }
 
-const AuthContext = createContext<AuthValue>({ user: null, loading: true, setSignedInUser: () => {} });
+const AuthContext = createContext<AuthValue>({
+  user: null,
+  loading: true,
+  setSignedInUser: () => {},
+});
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -23,7 +27,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED" && event !== "PASSWORD_RECOVERY") return;
+      if (
+        event !== "SIGNED_IN" &&
+        event !== "SIGNED_OUT" &&
+        event !== "USER_UPDATED" &&
+        event !== "PASSWORD_RECOVERY"
+      )
+        return;
       setUser(session?.user ?? null);
       setLoading(false);
     });

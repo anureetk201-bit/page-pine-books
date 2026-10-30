@@ -4,7 +4,11 @@
 const GOOGLE_CODES: Record<string, string> = { zh: "zh-CN", he: "iw", jv: "jw" };
 
 function setCookie(value: string | null) {
-  const hosts = ["", window.location.hostname, `.${window.location.hostname.split(".").slice(-2).join(".")}`];
+  const hosts = [
+    "",
+    window.location.hostname,
+    `.${window.location.hostname.split(".").slice(-2).join(".")}`,
+  ];
   for (const host of hosts) {
     const domain = host ? `;domain=${host}` : "";
     document.cookie = value
@@ -30,7 +34,11 @@ function patchDom() {
     return removeChild.call(this, child) as T;
   };
   const insertBefore = Node.prototype.insertBefore;
-  Node.prototype.insertBefore = function <T extends Node>(this: Node, node: T, ref: Node | null): T {
+  Node.prototype.insertBefore = function <T extends Node>(
+    this: Node,
+    node: T,
+    ref: Node | null,
+  ): T {
     if (ref && ref.parentNode !== this) return node;
     return insertBefore.call(this, node, ref) as T;
   };
@@ -49,8 +57,13 @@ export function initSiteTranslation(code: string) {
   }
   const g = window as unknown as Record<string, unknown>;
   g["googleTranslateElementInit"] = () => {
-    const google = g["google"] as { translate: { TranslateElement: new (o: object, id: string) => unknown } };
-    new google.translate.TranslateElement({ pageLanguage: "en", autoDisplay: false }, "google_translate_element");
+    const google = g["google"] as {
+      translate: { TranslateElement: new (o: object, id: string) => unknown };
+    };
+    new google.translate.TranslateElement(
+      { pageLanguage: "en", autoDisplay: false },
+      "google_translate_element",
+    );
   };
   const script = document.createElement("script");
   script.id = "google-translate-script";

@@ -12,7 +12,10 @@ export function useRecommendations(limit = 6) {
   const [purchased, setPurchased] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!user) { setPurchased([]); return; }
+    if (!user) {
+      setPurchased([]);
+      return;
+    }
     void supabase
       .from("order_items")
       .select("book_id, orders!inner(user_id)")
@@ -26,7 +29,11 @@ export function useRecommendations(limit = 6) {
   );
 
   return useMemo(
-    () => ({ signals, books: recommendBooks(catalog, signals, limit), personalized: signals.length > 0 }),
+    () => ({
+      signals,
+      books: recommendBooks(catalog, signals, limit),
+      personalized: signals.length > 0,
+    }),
     [catalog, signals, limit],
   );
 }

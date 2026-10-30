@@ -8,7 +8,19 @@ function VisaMark() {
   return (
     <span className={chip} title="Visa">
       <svg viewBox="0 0 40 14" className="h-3.5 w-9" role="img" aria-label="Visa">
-        <text x="20" y="11" textAnchor="middle" fontSize="11" fontWeight="800" fontStyle="italic" fill="#1A1F71" fontFamily="Arial, sans-serif" letterSpacing="0.5">VISA</text>
+        <text
+          x="20"
+          y="11"
+          textAnchor="middle"
+          fontSize="11"
+          fontWeight="800"
+          fontStyle="italic"
+          fill="#1A1F71"
+          fontFamily="Arial, sans-serif"
+          letterSpacing="0.5"
+        >
+          VISA
+        </text>
       </svg>
     </span>
   );
@@ -31,7 +43,17 @@ function AmexMark() {
     <span className={chip} title="American Express">
       <svg viewBox="0 0 36 16" className="h-4 w-9" role="img" aria-label="American Express">
         <rect width="36" height="16" rx="2" fill="#2E77BC" />
-        <text x="18" y="11.5" textAnchor="middle" fontSize="8" fontWeight="800" fill="#fff" fontFamily="Arial, sans-serif">AMEX</text>
+        <text
+          x="18"
+          y="11.5"
+          textAnchor="middle"
+          fontSize="8"
+          fontWeight="800"
+          fill="#fff"
+          fontFamily="Arial, sans-serif"
+        >
+          AMEX
+        </text>
       </svg>
     </span>
   );
@@ -52,7 +74,9 @@ function UpiMark() {
   return (
     <span className={chip} title="UPI">
       <span className="flex items-center gap-0.5">
-        <span className="text-[11px] font-extrabold leading-none" style={{ color: "#097C39" }}>UPI</span>
+        <span className="text-[11px] font-extrabold leading-none" style={{ color: "#097C39" }}>
+          UPI
+        </span>
         <svg viewBox="0 0 10 10" className="h-2.5 w-2.5" aria-hidden="true">
           <path d="M1 1h4l4 4-4 4H1l4-4z" fill="#F47216" />
         </svg>
@@ -64,7 +88,10 @@ function UpiMark() {
 function PaytmMark() {
   return (
     <span className={chip} title="Paytm">
-      <span className="text-[11px] font-extrabold lowercase leading-none tracking-tight" style={{ color: "#012B72" }}>
+      <span
+        className="text-[11px] font-extrabold lowercase leading-none tracking-tight"
+        style={{ color: "#012B72" }}
+      >
         pay<span style={{ color: "#00BAF2" }}>tm</span>
       </span>
     </span>
@@ -98,7 +125,9 @@ function ApplePayMark() {
     <span className={chip} title="Apple Pay">
       <span className="flex items-center gap-0.5">
         <Apple className="size-3" style={{ color: "#000" }} fill="#000" />
-        <span className="text-[11px] font-extrabold leading-none" style={{ color: "#000" }}>Pay</span>
+        <span className="text-[11px] font-extrabold leading-none" style={{ color: "#000" }}>
+          Pay
+        </span>
       </span>
     </span>
   );
@@ -118,7 +147,10 @@ export const PAYMENT_MARKS = [
 
 export function PaymentBadges({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex flex-wrap items-center gap-1.5 ${className}`} aria-label="Accepted payment methods">
+    <div
+      className={`flex flex-wrap items-center gap-1.5 ${className}`}
+      aria-label="Accepted payment methods"
+    >
       {PAYMENT_MARKS.map((Mark, i) => (
         <Mark key={i} />
       ))}
